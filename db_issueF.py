@@ -1,6 +1,7 @@
 import os
 import datetime
 import logging
+from unicodedata import name
 from dotenv import load_dotenv
 from playhouse.db_url import connect
 from peewee import Model, IntegerField, CharField, TextField, TimestampField
@@ -9,9 +10,9 @@ from peewee import Model, IntegerField, CharField, TextField, TimestampField
 load_dotenv()
 
 # 実行したSQLをログで出力する設定
-logger = logging.getLogger("peewee")
-logger.addHandler(logging.StreamHandler())
-logger.setLevel(logging.DEBUG)
+# logger = logging.getLogger("peewee")
+# logger.addHandler(logging.StreamHandler())
+# logger.setLevel(logging.DEBUG)
 
 # データベースへの接続設定
 # db = SqliteDatabase('peewee_db.sqlite')  # SQLite固定の場合
@@ -24,17 +25,17 @@ if not db.connect():
     exit()
 
 
-class Message(Model):
+class user_list(Model):
     """Message Model"""
 
     id = IntegerField(primary_key=True)  # idは自動で追加されるが明示
-    user = CharField()
-    content = TextField()
+    name = CharField()
+    age = IntegerField()
     pub_date = TimestampField(default=datetime.datetime.now())  # 何も指定しない場合は現在時刻が入る
 
     class Meta:
         database = db
-        table_name = "messages"
+        table_name = "user_list"
 
 
-db.create_tables([Message])
+db.create_tables([user_list])
