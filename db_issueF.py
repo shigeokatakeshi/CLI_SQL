@@ -31,7 +31,7 @@ class user_list(Model):
     id = IntegerField(primary_key=True)  # idは自動で追加されるが明示
     Name = CharField()
     Age = IntegerField()
-    pub_date = TimestampField(default=datetime.datetime.now())  # 何も指定しない場合は現在時刻が入る
+    #pub_date = TimestampField(default=datetime.datetime.now())  # 何も指定しない場合は現在時刻が入る
 
     class Meta:
         database = db
